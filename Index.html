@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Web</title>
+    <link rel="stylesheet" href="Styles/Styles.css">
+</head>
+<body>
+
+<div class="calculadora">
+    <input type="text" id="pantalla" readonly>
+    <div class="botones">
+        <button class="clear" onclick="clearScreen()">C</button>
+        <button class="operador" onclick="appendOperator('/')">/</button>
+        <button class="operador" onclick="appendOperator('*')">X</button>
+        <button class="operador" onclick="appendOperator('-')">-</button>
+
+        <button class="numero" onclick="appendNumber('7')">7</button>
+        <button class="numero" onclick="appendNumber('8')">8</button>
+        <button class="numero" onclick="appendNumber('9')">9</button>
+        <button class="operador" onclick="appendOperator('+')">+</button>
+
+        <button class="numero" onclick="appendNumber('4')">4</button>
+        <button class="numero" onclick="appendNumber('5')">5</button>
+        <button class="numero" onclick="appendNumber('6')">6</button>
+
+        <button class="operador" onclick="appendOperator('%')">%</button>
+
+
+        <button class="numero" onclick="appendNumber('2')">2</button>
+        <button class="numero" onclick="appendNumber('3')">3</button>
+
+        <button class="numero" onclick="appendNumber('1')">1</button>
+        <button class="operador" onclick="toggleSing()">±</button>
+
+        <button class="numero" onclick="appendNumber('0')">0</button>
+        <button class="numero" onclick="appendNumber('.')">.</button>
+        <button class="resultado" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<div class="historial">
+    <h2>Historial de Operaciones</h2>
+    <button onclick="clearHistorial()">Limpiar Historial</button>
+    <ul id="historial-list"></ul>
+</div>
+
+<script src="Scripts.js"></script>
+</body>
+</html>
