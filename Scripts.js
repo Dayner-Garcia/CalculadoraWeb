@@ -8,27 +8,46 @@ function appendNumber(number) {
 
 // Agregar los operadores a la pantalla
 function appendOperator(operator) {
+    const expresion = pantalla.value;
+
+    if (expresion.length === 0 || /[\+\-\*\/]$/.test(expresion)) {
+        return;
+    }
     pantalla.value += operator;
 }
 
 // Revisa la expresion, muestra el resultado y lo agrega al hsitorial mandandolo al local storage
 function calculate() {
     try {
-        var resultado = eval(pantalla.value);
+        // Validar antes de evaluar
+        const expresion = pantalla.value;
+
+        // Comprobar si hay operadores consecutivos
+        if (/[\+\-\*\/]{2,}/.test(expresion)) {
+            throw new Error("Entrada inválida: multiples operadores.");
+        }
+
+        // Comprobar si la expresión termina con un operador
+        if (/[\+\-\*\/]$/.test(expresion)) {
+            throw new Error("Entrada no valida: la expresión no puede terminar con un operador.");
+        }
+
+        // Evaluar
+        var resultado = eval(expresion);
         pantalla.value = resultado;
 
-        // Crear un nuevo elemento para la operacion
+        // Crear un nuevo elemento
         var operacion = document.createElement("li");
-        operacion.textContent = pantalla.value;
+        operacion.textContent = expresion + " = " + resultado;
 
-        // Agregar el lista al historial
+        // Agregar el elemento al historial
         historial.appendChild(operacion);
 
         // Guardar el historial en localStorage
         localStorage.setItem("historial", historial.innerHTML);
 
     } catch (error) {
-        pantalla.value = "error";
+        pantalla.value = "Error: " + error.message;
     }
 }
 
